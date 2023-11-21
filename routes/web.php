@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PrimerControlador;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,13 +20,7 @@ Route::get('/', function () {
 
 Route::prefix('sign')->group(function() {
 
-    Route::get('/signin/{p1}/{p2}/{p3}/{p4}', function($p1, $p2, $p3, $p4) {
-        $vista = $p1 . " " . $p2 . " " . $p3 . " " . $p4;
-        return view('signin')->with('a', $vista);
-    });
+    Route::get('/signin/{p1}/{p2}/{p3}/{p4}', [PrimerControlador::class, 'vista1']);
     
-    Route::get('/signup/{p1}/{p2}/{p3}', function($p1, $p2, $p3) {
-        $vista2 = $p1 . " " . $p2 . " " . $p3;
-        return view('signup')->with('b', $vista2);
-    });
+    Route::get('/signup/{p1}/{p2}/{p3}', [PrimerControlador::class, 'vista2']);
 });
