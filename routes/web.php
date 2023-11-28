@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PrimerControlador;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EscolaControlador;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('sign')->group(function() {
+// Ruta POST del /login que utilitza la funció login del EscolaControlador i passa pel middleware CheckEmail    
+Route::post('/login', [EscolaControlador::class, 'login'])->middleware('email')->name('comprovaCorreu.index');
+
+// Ruta GET d'error a la que ens redirigeix el middleware si el email és null
+Route::get('/error', function() {
+    return "Error d'accés";
+})->name('errorAcces.index');
+
+Route::prefix('sign')->group(function () {
 
     Route::get('/signin/{p1}/{p2}/{p3}/{p4}', [PrimerControlador::class, 'vista1']);
-    
+
     Route::get('/signup/{p1}/{p2}/{p3}', [PrimerControlador::class, 'vista2']);
 });

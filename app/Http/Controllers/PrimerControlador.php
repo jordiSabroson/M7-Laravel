@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class PrimerControlador extends Controller
 {
-    public function vista1($p1, $p2, $p3, $p4)
+    function vista1($p1, $p2, $p3, $p4)
     {
         $vista = $p1 . " " . $p2 . " " . $p3 . " " . $p4;
         return view('signin')->with('a', $vista);
     }
 
-    public function vista2($p1, $p2, $p3)
+    function vista2($p1, $p2, $p3)
     {
         $vista2 = $p1 . " " . $p2 . " " . $p3;
         return view('signup')->with('b', $vista2);

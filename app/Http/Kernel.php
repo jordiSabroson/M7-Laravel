@@ -34,7 +34,7 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            //\App\Http\Middleware\VerifyCsrfToken::class,  Es commenta aquesta línea per poder fer peticions POST externes
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -64,5 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'email' => \App\Http\Middleware\CheckEmail::class,      // S'afegeix aquesta línea amb la ruta del middleware i es posa un àlies per
+                                                                // utilitzar al web.php
     ];
 }

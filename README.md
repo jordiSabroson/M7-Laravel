@@ -1,66 +1,36 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PRÀCTICA 2 - SIGNIN
+## SIGN IN + SIGN UP AMB LARAVEL
+### Afegir les següents funcionalitats al codi de la pràctica 1.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**1. Crear tres vistes:**
+    1. professor: Mostrarà “Benvingut professor. El teu email és “. $email.
+    2. alumne: Mostrarà “Benvingut alumne. El teu email és “. $email”.
+    3. centre: Mostrarà “Benvingut administrador.El teu email és “. $email”.
+on $email és una variable que vindrà del controlador.
 
-## About Laravel
+**2. Crear dos rutes del tipus:**
+* POST 
+    * **Uri:** /login
+    * **Desc:** haurà de rebre per paràmetres del POST dos valors: email i password de l’usuari. (Recordeu que es fa amb l’objecte request.)
+    * **Lògica de la ruta:**
+Haureu d’inventar-vos una lògica amb arrays per saber si l’email que ens arriba correspon a un professor, alumne o administrador:
+        * Si és professor mostrarà la vista de professor tal i com s’indica en el punt 1. Haurà de mostrar el valor d’email.
+        * Si és alumne, mostrarà si la vista alumne tal i com s’indica en el punt 1. Haurà de mostrar el valor d’email.
+        * Si és admin, mostrarà la vista centre tal i com s’indica en el punt 1. Haurà de mostrar el valor d’email.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* GET 
+    * **uri:**/error
+    * **name:** errorAcces.index
+    * **return:** Ha de mostrar per pantalla “Error d’accés”.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**3. Crear un middleware:**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ha de controlar la ruta del POST:
 
-## Learning Laravel
+* Si el mail i el password estan informats, continuarà amb la petició.
+* En cas contrari, redireccionarà amb el to_route a la ruta de l’error a través del name.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**4. Condicions:**
+1. Les rutes han d’estar en un nou controlador LoginController.
+2. Les vistes s’han d’agrupar dins d’una carpeta.
+3. Heu d’utilitzar el postman o eines similars per fer proves de la petició del POST.
