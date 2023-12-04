@@ -33,3 +33,9 @@ Route::prefix('sign')->group(function () {
 
     Route::get('/signup/{p1}/{p2}/{p3}', [PrimerControlador::class, 'vista2']);
 });
+
+
+/************* PRÀCTICA 3 *************/
+Route::get('/login', function(){
+    return view('login');
+});
