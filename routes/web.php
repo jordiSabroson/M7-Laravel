@@ -36,6 +36,12 @@ Route::prefix('sign')->group(function () {
 
 
 /************* PRÀCTICA 3 *************/
-Route::get('/login', function(){
-    return view('login');
+Route::get('/login',  [EscolaControlador::class, 'login']);
+
+Route::get('/crearUsuari', function(){
+    return view('crearUsuari');
+});
+
+Route::get('/professor', function(){
+    return view('professor');
 });

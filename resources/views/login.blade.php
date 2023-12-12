@@ -11,5 +11,5 @@
     <br>
     <input type="submit" name="submit">
     <br>
-    <a href="">Crear usuari</a>
+    <a href="crearUsuari">Crear usuari</a>
 </form>

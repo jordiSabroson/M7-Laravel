@@ -14,6 +14,9 @@ class EscolaControlador extends Controller
         $email = Request('email');
         $password = Request('password');
 
+        $profes = ["Jpsep", "Jeremias", "Patrici", "Rigobefrta"];
+        $correus = ["joseppapp@ola.cat", "yeremaya@a.com", "pipa@klk.co", "rigoberftra@ads.acs"];
+
         // Guardem en un array els diferents correus amb els que mostrarem les diferents vistes
         $array = ["@profe.cat", "@alumne.cat", "@admin.cat"];
 
@@ -24,7 +27,7 @@ class EscolaControlador extends Controller
         } else if (str_contains($email, $array[1])) {
             return view('escola.alumne')->with('email', $email);
         } else if (str_contains($email, $array[2])) {
-            return view('escola.centre')->with('email', $email);
+            return view('escola.centre')->with('email', $email)->with('profes', $profes)->with('correus', $correus);
         }
     }
 }
