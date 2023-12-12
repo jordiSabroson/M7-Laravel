@@ -36,7 +36,7 @@ Route::prefix('sign')->group(function () {
 
 
 /************* PRÀCTICA 3 *************/
-Route::get('/login',  [EscolaControlador::class, 'login']);
+Route::get('/signin',  [EscolaControlador::class, 'signin']);
 
 Route::get('/crearUsuari', function(){
     return view('crearUsuari');

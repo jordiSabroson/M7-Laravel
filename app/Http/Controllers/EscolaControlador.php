@@ -30,4 +30,9 @@ class EscolaControlador extends Controller
             return view('escola.centre')->with('email', $email)->with('profes', $profes)->with('correus', $correus);
         }
     }
+
+    function signin()
+    {
+        return view('login');
+    }
 }
