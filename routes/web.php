@@ -3,6 +3,7 @@
 use App\Http\Controllers\PrimerControlador;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EscolaControlador;
+use App\Http\Controllers\UsuariControlador;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +45,10 @@ Route::get('/crearUsuari', function(){
 
 Route::get('/professor', function(){
     return view('professor');
+});
+
+/************* PRÀCTICA 4 *************/
+Route::controller(UsuariControlador::class)->group(function() {
+    Route::get('/crearUsuari', 'mostrarCrearUsuari');
+    Route::post('/crearUsuari', 'crearUsuari')-> name('crearUsuari');
 });
