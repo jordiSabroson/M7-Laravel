@@ -28,6 +28,11 @@ Route::get('/error', function() {
     return "Error d'accés";
 })->name('errorAcces.index');
 
+//
+Route::get('/hurra', function() {
+    return "<h1>Usuari creat!</h1><br><a href='signin'>Iniciar sessió</a>";
+})->name('totBe.index');
+
 Route::prefix('sign')->group(function () {
 
     Route::get('/signin/{p1}/{p2}/{p3}/{p4}', [PrimerControlador::class, 'vista1']);
@@ -51,4 +56,5 @@ Route::get('/professor', function(){
 Route::controller(UsuariControlador::class)->group(function() {
     Route::get('/crearUsuari', 'mostrarCrearUsuari');
     Route::post('/crearUsuari', 'crearUsuari')-> name('crearUsuari');
+    //Route::post('/signin', 'login')->name('crearUsuari');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuari;
+use Illuminate\Support\Facades\Auth;
 
 class UsuariControlador extends Controller
 {
@@ -34,16 +35,31 @@ class UsuariControlador extends Controller
 
         $usuari->save();
 
-        return view('login');
+        return to_route('totBe.index');
     }
 
     function login()
     {
-        $usuari = new Usuari();
+        $email = request('email');
+        $password = request('password');
 
-        $usuari->email = request('email');
-        $usuari->password = request('password');
+        $usuario = Usuari::where('email', $email) ->first();
 
-        //
+        if ($usuario && $usuario->password === $password) {
+            switch($usuario->rol) {
+                case('Alumne'):
+                    return view('escola.alumne')->with('email', $email);
+                    break;
+                case('Centre'):
+                    return view ('escola.centre')->with('email', $email);
+                    break;
+                case('Professor'):
+                    return view('escola.professor')->with('email', $email);
+                    break;
+                default:
+                    return view('errorAcces.index');
+            }
+        }
+        
     }
 }
