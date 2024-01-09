@@ -1,5 +1,5 @@
 <h1>Iniciar sessió de l'usuari</h1>
-<form action="/login" method="post">
+<form action="/signin" method="post">
     <label for="email">Email</label>
     <input type="email" id="email" name="email"/>
     <br>

@@ -43,23 +43,23 @@ class UsuariControlador extends Controller
         $email = request('email');
         $password = request('password');
 
-        $usuario = Usuari::where('email', $email) ->first();
+        $usuario = Usuari::where('email', $email)->first();
 
         if ($usuario && $usuario->password === $password) {
-            switch($usuario->rol) {
-                case('Alumne'):
+            switch ($usuario->rol) {
+                case ('Alumne'):
                     return view('escola.alumne')->with('email', $email);
                     break;
-                case('Centre'):
-                    return view ('escola.centre')->with('email', $email);
-                    break;
-                case('Professor'):
+                case ('Professor'):
                     return view('escola.professor')->with('email', $email);
+                    break;
+                case ('Centre'):
+                    $llistaProfessors = Usuari::where('rol', 'Professor')->get();
+                    return view('escola.centre')->with('email', $email)->with('llistaProfessors', $llistaProfessors);
                     break;
                 default:
                     return view('errorAcces.index');
             }
         }
-        
     }
 }
