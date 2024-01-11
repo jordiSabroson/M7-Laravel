@@ -1,4 +1,4 @@
-<h1>Crear un usuari</h1>
+<h1>Crear un usuari a</h1>
 <form action="{{route ('crearUsuari')}}" method="post">
     <label for="nom">Nom</label>
     <input type="text" name="nom" required/>
@@ -16,6 +16,7 @@
         <select name="rol">
             <option value="Professor">Professor</option>
             <option value="Alumne">Alumne</option>
+            <option value="Centre">Centre</option>
         </select>
     <br>
     <label for="actiu">Actiu</label>
@@ -28,3 +29,4 @@
     <br>
     <a href="signin">Iniciar sessió usuari</a>
 </form>
+

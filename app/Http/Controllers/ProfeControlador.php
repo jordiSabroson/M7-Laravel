@@ -7,10 +7,58 @@ use App\Models\Usuari;
 
 class ProfeControlador extends Controller
 {
-    function show($id)
+
+    function index()
+    {
+        $llistaProfessors = Usuari::where('rol', 'Professor')->get();
+        return view('escola.centre')->with('llistaProfessors', $llistaProfessors);
+    }
+
+    function crear()
+    {
+        return view('professor.add');
+    }
+
+    function edit($id)
     {
         $profe = Usuari::find($id);
 
-        return view('editar')->with('prof', $profe);
+        return view('professor.editar')->with('prof', $profe);
+    }
+
+    function guardar(Request $request)
+    {
+        $usuari = new Usuari();
+
+        $usuari->nom = $request->nom;
+
+        $usuari->save();
+
+        $llistaProf = Usuari::where('rol', 'Professor')->get();
+        return view('escola.centre')->with('llistaProfessors', $llistaProf);
+    }
+
+    function modificar($id)
+    {
+        $usuari = Usuari::find($id);
+
+        $usuari->nom = request('nom');
+        $usuari->cognoms = request('cognoms');
+        $usuari->password = request('password');
+        $usuari->email = request('email');
+        $usuari->rol = request('rol');
+        $usuari->actiu = request('actiu');
+
+        $usuari->save();
+
+        if ($usuari->rol == "Alumne") {
+            return view('escola.alumne');
+        } elseif ($usuari->rol == "Professor") {
+            return view('escola.professor');
+        } elseif ($usuari->rol == "Centre") {
+            $llistaProf = Usuari::where('rol', 'Professor')->get();
+            $email = Usuari::where('email', $usuari->email)->get();
+            return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('email', $email);
+        }
     }
 }

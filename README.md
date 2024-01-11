@@ -1,36 +1,33 @@
-# PRÀCTICA 2 - SIGNIN
+# PRÀCTICA 5 - CRUD
 ## SIGN IN + SIGN UP AMB LARAVEL
-### Afegir les següents funcionalitats al codi de la pràctica 1.
+### FUNCIONALITATS DE LA PRÀCTICA
 
-**1. Crear tres vistes:**
-    1. professor: Mostrarà “Benvingut professor. El teu email és “. $email.
-    2. alumne: Mostrarà “Benvingut alumne. El teu email és “. $email”.
-    3. centre: Mostrarà “Benvingut administrador.El teu email és “. $email”.
-on $email és una variable que vindrà del controlador.
+**1. S’ha de poder fer el login de l’aplicació.**
 
-**2. Crear dos rutes del tipus:**
-* POST 
-    * **Uri:** /login
-    * **Desc:** haurà de rebre per paràmetres del POST dos valors: email i password de l’usuari. (Recordeu que es fa amb l’objecte request.)
-    * **Lògica de la ruta:**
-Haureu d’inventar-vos una lògica amb arrays per saber si l’email que ens arriba correspon a un professor, alumne o administrador:
-        * Si és professor mostrarà la vista de professor tal i com s’indica en el punt 1. Haurà de mostrar el valor d’email.
-        * Si és alumne, mostrarà si la vista alumne tal i com s’indica en el punt 1. Haurà de mostrar el valor d’email.
-        * Si és admin, mostrarà la vista centre tal i com s’indica en el punt 1. Haurà de mostrar el valor d’email.
+**2. Si l’usuari és administrador del centre. (4,5 punts)**
 
-* GET 
-    * **uri:**/error
-    * **name:** errorAcces.index
-    * **return:** Ha de mostrar per pantalla “Error d’accés”.
+1. S’ha de redirigir a la pantalla de l’administrador.
+2. Ha de mostrar per pantalla un missatge de Beinvinguda.
+3. Ha d’aparèixer per defecte tots els usuaris de les BBDD que siguin professors.
+Si hi ha professors a les BBDD es mostrarà per pantalla el nom, cognom, correu i si està actiu per cada professor mitjançant una taula.
+    - Cada registre tindrà un botó per poder modificar els seus valors.
+        1. Ens redirigirà a una pantalla on ens mostrarà un formulari i carregarà els valors del professor per poder-ho modificar i guardar-los.
+        2. Un cop guardat tornarà automàticament a la pàgina d’inici i mostrarà tots els canvis en la llista de professors.
+    - Cada registre tindrà un botó per poder-lo eliminar.
+        1. Un cop eliminat es mostrarà la llista de professors actualitzada.
+4. En cas de que no hi hagin registres a la BBDD no apareixerà la taula de professors i en el seu lloc apareixerà un missatge que digui “No hi ha professors”. 
+5. Sempre haurà de ser visible a la part inferior un botó per poder afegir un professor.
+    - Ens redirigirà a una pantalla on ens mostrarà un formulari i un botó per poder guardar la informació.
 
-**3. Crear un middleware:**
+**3. Si l’usuari és professor del centre: (4,5 punts)**
 
-Ha de controlar la ruta del POST:
+- Farà exactament el mateix procés que l’administrador però en aquest cas per gestionar mitjançant un crud els usuaris que siguin alumnes.
 
-* Si el mail i el password estan informats, continuarà amb la petició.
-* En cas contrari, redireccionarà amb el to_route a la ruta de l’error a través del name.
+**4. Si l’usuari és alumne: (1 punt)**
 
-**4. Condicions:**
-1. Les rutes han d’estar en un nou controlador LoginController.
-2. Les vistes s’han d’agrupar dins d’una carpeta.
-3. Heu d’utilitzar el postman o eines similars per fer proves de la petició del POST.
+- Ha de poder afegir un document i mostrar l’enllaç per pantalla.
+
+RECORDEU QUE:
+- El crear ha de fer servir el mètode POST
+- L’editar ha de fer servir el mètode PUT
+- El borrar ha de fer servir el mètode DELETE

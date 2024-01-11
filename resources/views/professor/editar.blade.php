@@ -1,21 +1,18 @@
-<h1>Crear un usuari</h1>
-<form action="#" method="post">
+<h1>Editar un usuari</h1>
+<form action={{'/prof/'.$prof['id']}} method="post">
     @method('put')
     @csrf
-    <label for="numero">Numero</label>
-    <input type="number" name="numero" />
-    <br>
     <label for="nom">Nom</label>
-    <input type="text" name="nom" required/>
+    <input type="text" name="nom" value={{$prof['nom']}} required/>
     <br>
     <label for="cognoms">Cognoms</label>
-    <input type="text" name="cognoms" required/>
+    <input type="text" name="cognoms" value={{$prof['cognoms']}} required/>
     <br>
     <label for="password">Contrasenya</label>
     <input type="password" name="password" required/>
     <br>
     <label for="email">Email</label>
-    <input type="email" name="email" required/>
+    <input type="email" name="email" value={{$prof['email']}} required/>
     <br>
     <label for="rol">Rol</label>
         <select name="rol">
@@ -30,6 +27,6 @@
             <option value="2">No</option>
         <select>
     <br>
-    <input type="submit"/>
+    <input type="submit" value="Modifica"/>
     <br>
 </form>
