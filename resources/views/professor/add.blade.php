@@ -1,4 +1,4 @@
-<h1>Crear un usuari a</h1>
+<h1>Crear un usuari</h1>
 <form action="{{route ('crearUsuari')}}" method="post">
     <label for="nom">Nom</label>
     <input type="text" name="nom" required/>

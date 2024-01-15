@@ -57,8 +57,20 @@ class ProfeControlador extends Controller
             return view('escola.professor');
         } elseif ($usuari->rol == "Centre") {
             $llistaProf = Usuari::where('rol', 'Professor')->get();
+            $llistaAlum = Usuari::where('rol', 'Alumne')->get();
             $email = Usuari::where('email', $usuari->email)->get();
-            return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('email', $email);
+            return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('llistaAlumnes', $llistaAlum)->with('email', $email);
         }
+    }
+
+    function borrar ($id) {
+        $usuari = Usuari::find($id);
+
+        $usuari->delete();
+
+        $usuari->rol = request('rol');
+        $llistaProf = Usuari::where('rol', 'Professor')->get();
+            $llistaAlum = Usuari::where('rol', 'Alumne')->get();
+        return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('llistaAlumnes', $llistaAlum);
     }
 }

@@ -63,9 +63,9 @@ Route::controller(UsuariControlador::class)->group(function() {
 /************* PRÀCTICA 5 *************/
 Route::controller(ProfeControlador::class)->group(function() {
     Route::get('/prof', 'index') -> name('prof.index');
-    Route::get('/prof/{id}', 'edit') -> name('prof.edit');
+    Route::get('/prof/edit/{id}', 'edit') -> name('prof.edit');
     Route::get('/prof/crear', 'crear') -> name('prof.crear');
     Route::post('/prof', 'guardar') -> name('prof.guardar');
-    Route::put('/prof/{id}', 'modificar') -> name('prof.modificar');
-    Route::delete('/prof/{id}', 'borrar') -> name('prof.borrar');
+    Route::put('/prof/edit/{id}', 'modificar') -> name('prof.modificar');
+    Route::delete('/prof/delete/{id}', 'borrar') -> name('prof.borrar');
 });

@@ -1,5 +1,5 @@
 <h1>Editar un usuari</h1>
-<form action={{'/prof/'.$prof['id']}} method="post">
+<form action={{'/prof/edit/'.$prof['id']}} method="post">
     @method('put')
     @csrf
     <label for="nom">Nom</label>

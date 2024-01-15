@@ -55,7 +55,8 @@ class UsuariControlador extends Controller
                     break;
                 case ('Centre'):
                     $llistaProfessors = Usuari::where('rol', 'Professor')->get();
-                    return view('escola.centre')->with('email', $email)->with('llistaProfessors', $llistaProfessors);
+                    $llistaAlum = Usuari::where('rol', 'Alumne')->get();
+                    return view('escola.centre')->with('email', $email)->with('llistaAlumnes', $llistaAlum)->with('llistaProfessors', $llistaProfessors);
                     break;
                 default:
                     return view('errorAcces.index');
