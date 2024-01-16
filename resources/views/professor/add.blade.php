@@ -27,6 +27,6 @@
     <br>
     <input type="submit"/>
     <br>
-    <a href="signin">Iniciar sessió usuari</a>
+    <a href="/signin">Iniciar sessió usuari</a>
 </form>
 

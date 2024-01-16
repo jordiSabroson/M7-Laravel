@@ -51,16 +51,17 @@ class UsuariControlador extends Controller
                     return view('escola.alumne')->with('email', $email);
                     break;
                 case ('Professor'):
-                    return view('escola.professor')->with('email', $email);
+                    $llistaAlum = Usuari::where('rol', 'Alumne')->get();
+                    return view('escola.professor')->with('llistaAlumnes', $llistaAlum);
                     break;
                 case ('Centre'):
                     $llistaProfessors = Usuari::where('rol', 'Professor')->get();
                     $llistaAlum = Usuari::where('rol', 'Alumne')->get();
-                    return view('escola.centre')->with('email', $email)->with('llistaAlumnes', $llistaAlum)->with('llistaProfessors', $llistaProfessors);
+                    return view('escola.centre')->with('llistaAlumnes', $llistaAlum)->with('llistaProfessors', $llistaProfessors);
                     break;
-                default:
-                    return view('errorAcces.index');
             }
+        } else {
+            return view('error');
         }
     }
 }

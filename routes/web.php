@@ -18,19 +18,13 @@ use App\Http\Controllers\ProfeControlador;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 // Ruta POST del /login que utilitza la funció login del EscolaControlador i passa pel middleware CheckEmail    
 Route::post('/login', [EscolaControlador::class, 'login'])->middleware('email')->name('comprovaCorreu.index');
 
-// Ruta GET d'error a la que ens redirigeix el middleware si el email és null
-Route::get('/error', function() {
-    return "Error d'accés";
-})->name('errorAcces.index');
-
-//
-Route::get('/hurra', function() {
+Route::get('/hurra', function () {
     return "<h1>Usuari creat!</h1><br><a href='signin'>Iniciar sessió</a>";
 })->name('totBe.index');
 
@@ -45,27 +39,28 @@ Route::prefix('sign')->group(function () {
 /************* PRÀCTICA 3 *************/
 Route::get('/signin',  [EscolaControlador::class, 'signin']);
 
-Route::get('/crearUsuari', function(){
+Route::get('/crearUsuari', function () {
     return view('crearUsuari');
 });
 
-Route::get('/professor', function(){
+Route::get('/professor', function () {
     return view('professor');
 });
 
 /************* PRÀCTICA 4 *************/
-Route::controller(UsuariControlador::class)->group(function() {
+Route::controller(UsuariControlador::class)->group(function () {
     Route::get('/crearUsuari', 'mostrarCrearUsuari');
-    Route::post('/crearUsuari', 'crearUsuari')-> name('crearUsuari');
+    Route::post('/crearUsuari', 'crearUsuari')->name('crearUsuari');
     Route::post('/signin', 'login');
 });
 
 /************* PRÀCTICA 5 *************/
-Route::controller(ProfeControlador::class)->group(function() {
-    Route::get('/prof', 'index') -> name('prof.index');
-    Route::get('/prof/edit/{id}', 'edit') -> name('prof.edit');
-    Route::get('/prof/crear', 'crear') -> name('prof.crear');
-    Route::post('/prof', 'guardar') -> name('prof.guardar');
-    Route::put('/prof/edit/{id}', 'modificar') -> name('prof.modificar');
-    Route::delete('/prof/delete/{id}', 'borrar') -> name('prof.borrar');
+Route::controller(ProfeControlador::class)->group(function () {
+    Route::get('/prof', 'index')->name('prof.index');
+    Route::get('/prof/edit/{id}', 'edit')->name('prof.edit');
+    Route::get('/prof/crear', 'crear')->name('prof.crear');
+    Route::post('/prof', 'guardar')->name('prof.guardar');
+    Route::put('/prof/edit/{id}', 'modificar')->name('prof.modificar');
+    Route::delete('/prof/delete/{id}', 'borrar')->name('prof.borrar');
+    Route::post('/prof/pujar', 'pujar')->name('prof.pujar');
 });

@@ -54,23 +54,46 @@ class ProfeControlador extends Controller
         if ($usuari->rol == "Alumne") {
             return view('escola.alumne');
         } elseif ($usuari->rol == "Professor") {
-            return view('escola.professor');
+            $llistaAlum = Usuari::where('rol', 'Alumne')->get();
+            return view('escola.professor')->with('llistaAlumnes', $llistaAlum);
         } elseif ($usuari->rol == "Centre") {
             $llistaProf = Usuari::where('rol', 'Professor')->get();
             $llistaAlum = Usuari::where('rol', 'Alumne')->get();
-            $email = Usuari::where('email', $usuari->email)->get();
-            return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('llistaAlumnes', $llistaAlum)->with('email', $email);
+            return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('llistaAlumnes', $llistaAlum);
         }
     }
 
-    function borrar ($id) {
+    function borrar($id)
+    {
         $usuari = Usuari::find($id);
 
         $usuari->delete();
 
-        $usuari->rol = request('rol');
-        $llistaProf = Usuari::where('rol', 'Professor')->get();
+        if ($usuari->rol === "Professor") {
+            $llistaProf = Usuari::where('rol', 'Professor')->get();
             $llistaAlum = Usuari::where('rol', 'Alumne')->get();
-        return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('llistaAlumnes', $llistaAlum);
+            return view('escola.centre')->with('llistaProfessors', $llistaProf)->with('llistaAlumnes', $llistaAlum);
+        } elseif ($usuari->rol === "Alumne") {
+            $llistaAlum = Usuari::where('rol', 'Alumne')->get();
+            return view('escola.professor')->with('llistaAlumnes', $llistaAlum);
+        } else {
+            return redirect()->back()->with('error', 'Rol no válido');
+        }
+    }
+
+    function pujar(Request $request) {
+        $request->validate([
+            'document' => 'required|mimes:jpg,png,pdf,doc,docx|max:10240', // Ajusta las extensiones y el tamaño según tus necesidades
+        ]);
+
+        $fitxer = $request->file('document');
+        $ruta = $fitxer->store('documents/alumnes', 'public'); // Almacenar el archivo en la carpeta 'storage/app/documentos/alumnos'
+
+        // // Ahora, puedes guardar la ruta del archivo en la base de datos para el alumno actual
+        // $usuari = Usuari::find($id); // Asume que el alumno está autenticado
+        // $usuari->ruta_document = 'documents/alumnes' . basename($ruta);
+        // $usuari->save();
+
+        return view('escola.alumne');
     }
 }

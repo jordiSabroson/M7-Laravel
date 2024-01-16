@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <h1>Benvingut admin! El teu email és {{ $email }}</h1>
+    <h1>Benvingut admin!</h1>
     <a href="/prof/crear"> Crear un nou usuari</a>
     <h2>Llista de professors</h2>
     @if (count($llistaProfessors) > 0)
@@ -44,7 +44,13 @@
                     <td>{{ $prof['email'] }}</td>
                     <td>{{ $prof['actiu'] }}</td>
                     <td><a href="{{ '/prof/edit/' . $prof['id'] }}">Editar</a></td>
-                    <td><a href="{{ '/prof/edit/' . $prof['id'] }}">Borrar</a></td>
+                    <td>
+                        <form action="{{'/prof/delete/' . $prof['id']}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Borrar</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
 
@@ -69,13 +75,20 @@
                     <td>{{ $alum['email'] }}</td>
                     <td>{{ $alum['actiu'] }}</td>
                     <td><a href="{{ '/prof/edit/' . $alum['id'] }}">Editar</a></td>
-                    <td><a href="{{ '/prof/delete/' . $alum['id'] }}">Borrar</a></td>
+                    <td>
+                        <form action="{{'/prof/delete/' . $alum['id']}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Borrar</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
     @else
         <h2>No hi ha alumnes inscrits</h2>
     @endif
+    <a href="/signin">Desconnectar-se</a>
 </body>
 
 </html>

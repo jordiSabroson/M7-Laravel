@@ -1,1 +1,0 @@
-<h1>Benvingut professor! El teu email és {{email}} </h1>

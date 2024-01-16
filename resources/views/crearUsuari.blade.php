@@ -16,6 +16,7 @@
         <select name="rol">
             <option value="Professor">Professor</option>
             <option value="Alumne">Alumne</option>
+            <option value="Centre">Centre</option>
         </select>
     <br>
     <label for="actiu">Actiu</label>
