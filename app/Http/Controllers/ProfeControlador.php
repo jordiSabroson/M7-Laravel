@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuari;
+use Illuminate\Support\Facades\Storage;
 
 class ProfeControlador extends Controller
 {
@@ -83,17 +84,13 @@ class ProfeControlador extends Controller
 
     function pujar(Request $request) {
         $request->validate([
-            'document' => 'required|mimes:jpg,png,pdf,doc,docx|max:10240', // Ajusta las extensiones y el tamaño según tus necesidades
+            'document' => 'required|mimes:jpg,png,jpeg|max:10240', // Ajusta las extensiones y el tamaño según tus necesidades
         ]);
 
         $fitxer = $request->file('document');
         $ruta = $fitxer->store('documents/alumnes', 'public'); // Almacenar el archivo en la carpeta 'storage/app/documentos/alumnos'
 
-        // // Ahora, puedes guardar la ruta del archivo en la base de datos para el alumno actual
-        // $usuari = Usuari::find($id); // Asume que el alumno está autenticado
-        // $usuari->ruta_document = 'documents/alumnes' . basename($ruta);
-        // $usuari->save();
-
-        return view('escola.alumne');
+        $url = Storage::url($ruta);
+        return view('escola.alumne')->with('fitxer', $url);
     }
 }
